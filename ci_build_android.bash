@@ -91,7 +91,7 @@ yes | ant -Dplatform.linux=true \
 
 # Copy native libraries
 rm -rf bin/out; mkdir bin/out
-find $LWJGL_NATIVE -name 'liblwjgl*.so' -exec cp {} bin/out/ \;
+find $LWJGL_NATIVE -name 'lib*.so' -exec cp {} bin/out/ \;
 cp $LWJGL_NATIVE/shaderc/libshaderc.so bin/out/
 
 # Cleanup unused output jar files
