@@ -27,7 +27,7 @@ jobs:
         bash ci_build_android.bash
 
     - name: Upload modules release output
-      if: ${{matrix.arch == 'arm64'}} # Only upload this once
+      if: ${{matrix.arch == 'arm32'}} # Only upload this once
       uses: actions/upload-artifact@v1
       with:
         name: lwjgl3-android-modules
