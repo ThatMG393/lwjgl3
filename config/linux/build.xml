@@ -5,18 +5,6 @@
 <project name="native-linux" basedir="../.." xmlns:if="ant:if" xmlns:unless="ant:unless">
     <import file="../build-definitions.xml"/>
 
-<!--
-    <property name="gcc.prefix" value="aarch64-linux-gnu-" if:set="build.arch.arm64"/>
-    <property name="gcc.prefix" value="arm-linux-gnueabihf-" if:set="build.arch.arm32"/>
-
-    <condition property="gcc.prefix" value="${gcc.prefix}" else="">
-        <isset property="gcc.prefix"/>
-    </condition>
-    <condition property="gcc.suffix" value="-${gcc.version}" else="">
-        <isset property="gcc.version"/>
-    </condition>
--->
-
     <property name="ndk.abi" value="21"/>
     <property name="ndk.home" value="${env.ANDROID_NDK_HOME}"/>
     <property name="ndk.bin" value="${ndk.home}/toolchains/llvm/prebuilt/linux-x86_64/bin"/>
@@ -127,14 +115,6 @@
 
             <local name="gcc"/>
             <property name="gcc" value="@{gcc.exec}"/>
-<!--
-            <condition property="gcc" value="@{gcc.exec}" else="@{gpp.exec}">
-                <and>
-                    <equals arg1="@{lang}" arg2="c"/>
-                    <equals arg1="@{linker}" arg2="gcc"/>
-                </and>
-            </condition>
--->
 
             <local name="force-cpp-static-linking"/>
             <condition property="force-cpp-static-linking" value="true">
@@ -459,6 +439,8 @@
                 <fileset dir="." includes="${src.generated}/*.cpp"/>
             </source>
             <link>
+                <arg value="-l:libc++abi.a"/>
+                <arg value="-l:libc++_static.a"/>
                 <arg value="-latomic" if:set="build.arch.arm"/>
             </link>
         </build>
