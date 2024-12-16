@@ -51,7 +51,9 @@ if [ "$SKIP_FREETYPE" != "1" ]; then
   cd freetype-$BUILD_FREETYPE_VERSION
 
   export CC=$NDK_TARGET-linux-android${NDK_SUFFIX}21-clang
-
+  export CFLAGS="$CFLAGS -Ofast"
+  export CPPFLAGS="$CPPFLAGS -Ofast"
+  
   ./configure \
     --host=$TARGET \
     --prefix=`pwd`/build_android-$LWJGL_BUILD_ARCH \
@@ -134,4 +136,4 @@ if [ -e "$LWJGL_NATIVE/libfreetype.so" ]; then
 fi
 
 # Cleanup unused output jar files
-find bin/RELEASE \( -name '*-natives-*' -o -name '*-sources.jar' \) -delete
+# find bin/RELEASE \( -name '*-natives-*' -o -name '*-sources.jar' \) -delete
