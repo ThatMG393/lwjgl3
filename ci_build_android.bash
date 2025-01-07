@@ -124,7 +124,8 @@ yes | ant -Dplatform.linux=true \
   -Dbinding.zstd=false \
   -Dbuild.type=release/3.3.3 \
   -Djavadoc.skip=true \
-  -Dbuild.strip=false \ # wild ass guess
+  -Dbuild.strip=false \
+  -Dbuild.cflags.append="-Ofast" \
   -Dnashorn.args="--no-deprecation-warning" \
   compile compile-native release
 
